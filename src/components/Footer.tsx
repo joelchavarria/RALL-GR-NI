@@ -22,8 +22,7 @@ export function Footer() {
         <div>
           <p className="text-sm font-semibold">Contacto</p>
           <p className="mt-3 text-sm leading-6 text-stone-300">
-            Proyecto personal preparado para crecer con Google Sheets como fuente de
-            datos.
+            Granada, Nicaragua
           </p>
         </div>
       </div>
