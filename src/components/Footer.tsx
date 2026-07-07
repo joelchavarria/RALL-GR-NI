@@ -21,9 +21,7 @@ export function Footer() {
         </div>
         <div>
           <p className="text-sm font-semibold">Contacto</p>
-          <p className="mt-3 text-sm leading-6 text-stone-300">
-            Granada, Nicaragua
-          </p>
+          <p className="mt-3 text-sm leading-6 text-stone-300">Granada, Nicaragua</p>
         </div>
       </div>
     </footer>

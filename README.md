@@ -1,6 +1,6 @@
 # Granada Sabores
 
-Granada Sabores es una guia gastronomica moderna de Granada, Nicaragua. El proyecto esta construido con Next.js 15, React, TypeScript y Tailwind CSS, con una arquitectura simple para publicar en Vercel y reemplazar posteriormente los archivos JSON por Google Sheets.
+Granada Sabores es una guia gastronomica moderna de Granada, Nicaragua. El proyecto esta construido con Next.js 15, React, TypeScript y Tailwind CSS, con una arquitectura simple, datos locales y componentes reutilizables.
 
 ## Stack
 
@@ -65,15 +65,13 @@ src/
 
 Los restaurantes y lugares turisticos viven en `src/data`. La capa `src/lib/data.ts` centraliza el acceso a esos datos para que las paginas no dependan directamente del origen.
 
-Cuando se quiera migrar a Google Sheets, la idea es reemplazar la implementacion interna de `src/lib/data.ts` por un cliente que lea la hoja publicada o una API intermedia, manteniendo los mismos tipos de `src/lib/types.ts`.
+## Publicacion
 
-## Deploy en Vercel
-
-El proyecto esta preparado para Vercel:
+El proyecto esta preparado para publicarse como aplicacion web:
 
 - Usa App Router y generacion estatica para los detalles de restaurante.
 - No requiere backend ni base de datos.
-- Las imagenes externas de Unsplash estan configuradas en `next.config.ts`.
+- Las imagenes externas permitidas estan configuradas en `next.config.ts`.
 - El comando de build es `npm run build`.
 
 Variables de entorno requeridas actualmente: ninguna.

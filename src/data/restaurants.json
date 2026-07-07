@@ -56,18 +56,18 @@
     "reviewCount": 1250,
     "isOpenNow": true,
     "featured": true,
-    "shortDescription": "Cafe, brunch fresco y patio colonial con ambiente relajado.",
-    "description": "Un punto querido por viajeros y locales para desayunos, ensaladas, sandwiches y cafe nicaraguense en un patio lleno de luz.",
-    "address": "Calle Libertad, Granada, Nicaragua",
-    "phone": "+50588884567",
-    "whatsapp": "50588884567",
+    "shortDescription": "Cafe de especialidad, desayunos, almuerzos y cena en una casa colonial.",
+    "description": "Un espacio querido en el centro historico que une cultura, cafe, comunidad y comida fresca. Ideal para desayunar, trabajar tranquilo, almorzar ligero o cerrar el dia en un patio lleno de plantas.",
+    "address": "Del Parque Central 1 cuadra al Este, Calle La Libertad, Granada, Nicaragua",
+    "phone": "+50525528582",
+    "whatsapp": "50525528582",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Garden+Cafe+Granada+Nicaragua",
     "wazeUrl": "https://waze.com/ul?q=Garden%20Cafe%20Granada%20Nicaragua",
-    "heroImage": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1800&q=85",
+    "heroImage": "https://images.squarespace-cdn.com/content/v1/5eebbed350c7647b8fad58d2/f416aa42-4e24-4971-9ea7-6aa65ecd548f/GardenCafe-7%2B%281%29.jpg",
     "gallery": [
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=85"
+      "https://images.squarespace-cdn.com/content/v1/5eebbed350c7647b8fad58d2/d492b6ab-811a-476b-bb2a-280beeba5390/AA04C29C-1C31-4493-97E4-03450BE270E3.jpeg",
+      "https://images.squarespace-cdn.com/content/v1/5eebbed350c7647b8fad58d2/1592587790878-8D4GJ3BLDTK2P5IVLTP2/Damien%2Band%2BXiomara%2BHopkins",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85"
     ],
     "menu": [
       {
@@ -87,7 +87,7 @@
       }
     ],
     "hours": [{ "day": "Todos los dias", "time": "7:00 AM - 9:00 PM" }],
-    "amenities": ["WiFi", "Patio", "Vegetariano", "Cafe especial"],
+    "amenities": ["WiFi", "Patio", "Vegetariano", "Cafe especial", "Tienda local"],
     "coordinates": { "lat": 11.9304, "lng": -85.9538 }
   },
   {
@@ -98,13 +98,13 @@
     "price": "$$",
     "rating": 4.6,
     "reviewCount": 936,
-    "isOpenNow": false,
+    "isOpenNow": true,
     "featured": true,
-    "shortDescription": "Cocina mediterranea, cocteles y noches animadas en el centro.",
-    "description": "Sabores mediterraneos, platos para compartir y una ubicacion ideal para caminar por el centro historico despues de cenar.",
-    "address": "Centro historico, Granada, Nicaragua",
-    "phone": "+50588887890",
-    "whatsapp": "50588887890",
+    "shortDescription": "Sabores mediterraneos y arabes: hummus, falafel, kebabs, pita y ensaladas.",
+    "description": "Pita Pita es una parada popular para compartir platos mediterraneos en un ambiente relajado. Su menu incluye opciones vegetarianas, pitas, falafel, hummus, ensaladas, kebabs y pizzas artesanales.",
+    "address": "Calle La Libertad / Calle Cervantes, Granada, Nicaragua",
+    "phone": "+50582729184",
+    "whatsapp": "50582729184",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Pita+Pita+Granada+Nicaragua",
     "wazeUrl": "https://waze.com/ul?q=Pita%20Pita%20Granada%20Nicaragua",
     "heroImage": "https://images.unsplash.com/photo-1544510808-91bcbee1df55?auto=format&fit=crop&w=1800&q=85",
@@ -130,8 +130,11 @@
         "price": "C$ 300"
       }
     ],
-    "hours": [{ "day": "Martes a Domingo", "time": "12:00 PM - 10:00 PM" }],
-    "amenities": ["Cocteles", "Vegano", "Centro", "Para compartir"],
+    "hours": [
+      { "day": "Lunes a Sabado", "time": "12:00 PM - 10:00 PM" },
+      { "day": "Domingo", "time": "11:00 AM - 10:00 PM" }
+    ],
+    "amenities": ["Cocteles", "Vegano", "Centro", "Para compartir", "Patio"],
     "coordinates": { "lat": 11.9308, "lng": -85.9552 }
   },
   {
@@ -143,12 +146,12 @@
     "rating": 4.5,
     "reviewCount": 521,
     "isOpenNow": true,
-    "featured": false,
-    "shortDescription": "Hamburguesas, cervezas frias y musica en vivo algunos dias.",
-    "description": "Un lugar casual para terminar el dia con comida abundante, buen precio y ambiente joven cerca de las calles mas caminables.",
-    "address": "Calle El Arsenal, Granada, Nicaragua",
-    "phone": "+50588880987",
-    "whatsapp": "50588880987",
+    "featured": true,
+    "shortDescription": "Hamburguesas, comida casual, cervezas frias y ambiente familiar cerca de Xalteva.",
+    "description": "Comedor La Frontera es un negocio familiar con estilo sencillo y campestre. Es conocido por sus hamburguesas, comida abundante, precios accesibles y atencion amable para locales y visitantes.",
+    "address": "Iglesia Xalteva 1 1/2 cuadras al Este, Granada, Nicaragua",
+    "phone": "+50525582120",
+    "whatsapp": "50525582120",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=La+Frontera+Granada+Nicaragua",
     "wazeUrl": "https://waze.com/ul?q=La%20Frontera%20Granada%20Nicaragua",
     "heroImage": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1800&q=85",
@@ -174,8 +177,11 @@
         "price": "C$ 240"
       }
     ],
-    "hours": [{ "day": "Miercoles a Lunes", "time": "4:00 PM - 12:00 AM" }],
-    "amenities": ["Musica", "Casual", "Cerveza", "Pet friendly"],
+    "hours": [
+      { "day": "Miercoles a Domingo", "time": "12:00 PM - 7:30 PM" },
+      { "day": "Lunes y Martes", "time": "Cerrado" }
+    ],
+    "amenities": ["Casual", "Cerveza", "Familiar", "Pet friendly", "Terraza"],
     "coordinates": { "lat": 11.9315, "lng": -85.9581 }
   },
   {

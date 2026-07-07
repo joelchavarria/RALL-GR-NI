@@ -18,8 +18,8 @@ export default function Home() {
         <section className="relative isolate overflow-hidden">
           <div className="absolute inset-0 -z-10">
             <Image
-              src="https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?auto=format&fit=crop&w=2200&q=85"
-              alt="Vista colonial inspirada en Granada, Nicaragua"
+              src="/images/catedral-granada.jpeg"
+              alt="Catedral de Granada, Nicaragua"
               fill
               priority
               sizes="100vw"
@@ -71,8 +71,8 @@ export default function Home() {
             <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
               <SectionHeading
                 eyebrow="Destacados"
-                title="Restaurantes para empezar bien"
-                description="Una seleccion inicial de lugares con buena ubicacion, ambiente y platos memorables."
+                title="Negocios locales para apoyar"
+                description="Lugares reales de Granada donde cada visita tambien ayuda a mover la economia local."
               />
               <Link
                 href="/restaurantes"
@@ -97,7 +97,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Granada"
             title="Lugares para combinar con tu ruta"
-            description="La comida sabe mejor cuando el dia incluye arquitectura, lago, volcan y calles para caminar sin prisa."
+            description="La comida sabe mejor cuando el dia incluye catedral, lago, isletas y calles para caminar sin prisa."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {places.map((place) => (
@@ -129,8 +129,8 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:items-center lg:px-8">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[32px] md:aspect-[5/4]">
               <Image
-                src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1600&q=85"
-                alt="Mesa preparada para compartir comida en Granada"
+                src="/images/granada-isletas.jpeg"
+                alt="Lancha recorriendo las Isletas de Granada"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
@@ -139,11 +139,11 @@ export default function Home() {
             <div>
               <SectionHeading
                 eyebrow="Quienes somos"
-                title="Una guia hecha para descubrir mejor"
-                description="Granada Sabores nace como un proyecto personal para reunir recomendaciones utiles, visuales y faciles de explorar. Hoy usa datos mock en JSON y esta preparado para conectarse despues a Google Sheets como fuente editable."
+                title="Una guia hecha para ayudar"
+                description="Somos emprendedores que creemos en aportar a la sociedad creando herramientas utiles para todos. Granada Sabores nace para orientar a visitantes, promover negocios locales y mostrar con orgullo la belleza de Granada, Nicaragua."
               />
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                {["Datos simples", "Mobile first", "Listo para Vercel"].map((item) => (
+                {["Apoyo local", "Guia clara", "Granada para todos"].map((item) => (
                   <div
                     key={item}
                     className="rounded-3xl border border-stone-200 bg-stone-50 p-5 text-sm font-semibold text-stone-900"
