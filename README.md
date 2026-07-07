@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Granada Sabores
 
-## Getting Started
+Granada Sabores es una guia gastronomica moderna de Granada, Nicaragua. El proyecto esta construido con Next.js 15, React, TypeScript y Tailwind CSS, con una arquitectura simple para publicar en Vercel y reemplazar posteriormente los archivos JSON por Google Sheets.
 
-First, run the development server:
+## Stack
+
+- Next.js 15 con App Router
+- React y TypeScript
+- Tailwind CSS
+- ESLint y Prettier
+- Datos mock en JSON
+- Diseno responsive mobile first
+
+## Pantallas
+
+- Home con hero, buscador, categorias, restaurantes destacados, lugares turisticos, seccion "Quienes Somos" y footer.
+- Listado de restaurantes con filtros por categoria, precio, abierto ahora y busqueda.
+- Detalle de restaurante con hero, galeria, informacion, menu, horarios, ubicacion, botones de Google Maps, Waze, WhatsApp, compartir y restaurantes relacionados.
+
+## Instalacion local
+
+```bash
+npm install
+npm run dev
+```
+
+Abrir [http://localhost:3000](http://localhost:3000).
+
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
+npm run lint
+npm run format
+npm run format:check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estructura
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+src/
+  app/
+    page.tsx
+    restaurantes/
+      page.tsx
+      [slug]/page.tsx
+  components/
+    Footer.tsx
+    Header.tsx
+    RestaurantCard.tsx
+    RestaurantFilters.tsx
+    SearchBox.tsx
+    SectionHeading.tsx
+  data/
+    places.json
+    restaurants.json
+  lib/
+    data.ts
+    types.ts
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Datos
 
-## Learn More
+Los restaurantes y lugares turisticos viven en `src/data`. La capa `src/lib/data.ts` centraliza el acceso a esos datos para que las paginas no dependan directamente del origen.
 
-To learn more about Next.js, take a look at the following resources:
+Cuando se quiera migrar a Google Sheets, la idea es reemplazar la implementacion interna de `src/lib/data.ts` por un cliente que lea la hoja publicada o una API intermedia, manteniendo los mismos tipos de `src/lib/types.ts`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy en Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+El proyecto esta preparado para Vercel:
 
-## Deploy on Vercel
+- Usa App Router y generacion estatica para los detalles de restaurante.
+- No requiere backend ni base de datos.
+- Las imagenes externas de Unsplash estan configuradas en `next.config.ts`.
+- El comando de build es `npm run build`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Variables de entorno requeridas actualmente: ninguna.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Repositorio
+
+Remoto configurado:
+
+```bash
+git remote add origin https://github.com/joelchavarria/RALL-GR-NI.git
+```

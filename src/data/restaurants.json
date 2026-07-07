@@ -1,0 +1,269 @@
+[
+  {
+    "id": 1,
+    "slug": "el-zaguan",
+    "name": "El Zaguan",
+    "category": "Nicaraguense",
+    "price": "$$",
+    "rating": 4.8,
+    "reviewCount": 842,
+    "isOpenNow": true,
+    "featured": true,
+    "shortDescription": "Cortes a la parrilla, vigoron y cocina tradicional cerca de La Calzada.",
+    "description": "Un clasico granadino para almuerzos familiares, cenas con amigos y visitantes que quieren probar sabores locales con servicio atento.",
+    "address": "Calle La Calzada, Granada, Nicaragua",
+    "phone": "+50588881234",
+    "whatsapp": "50588881234",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=El+Zaguan+Granada+Nicaragua",
+    "wazeUrl": "https://waze.com/ul?q=El%20Zaguan%20Granada%20Nicaragua",
+    "heroImage": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1800&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "menu": [
+      {
+        "name": "Lomito jalapeno",
+        "description": "Corte suave con salsa cremosa y guarniciones.",
+        "price": "C$ 520"
+      },
+      {
+        "name": "Vigoron granadino",
+        "description": "Yuca, chicharron y ensalada de repollo.",
+        "price": "C$ 220"
+      },
+      {
+        "name": "Tostones con queso",
+        "description": "Entrada crujiente para compartir.",
+        "price": "C$ 180"
+      }
+    ],
+    "hours": [
+      { "day": "Lunes a Jueves", "time": "11:00 AM - 10:00 PM" },
+      { "day": "Viernes a Domingo", "time": "11:00 AM - 11:00 PM" }
+    ],
+    "amenities": ["Terraza", "Familiar", "Reservas", "Tarjetas"],
+    "coordinates": { "lat": 11.9299, "lng": -85.956 }
+  },
+  {
+    "id": 2,
+    "slug": "garden-cafe",
+    "name": "Garden Cafe",
+    "category": "Cafe",
+    "price": "$$",
+    "rating": 4.7,
+    "reviewCount": 1250,
+    "isOpenNow": true,
+    "featured": true,
+    "shortDescription": "Cafe, brunch fresco y patio colonial con ambiente relajado.",
+    "description": "Un punto querido por viajeros y locales para desayunos, ensaladas, sandwiches y cafe nicaraguense en un patio lleno de luz.",
+    "address": "Calle Libertad, Granada, Nicaragua",
+    "phone": "+50588884567",
+    "whatsapp": "50588884567",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Garden+Cafe+Granada+Nicaragua",
+    "wazeUrl": "https://waze.com/ul?q=Garden%20Cafe%20Granada%20Nicaragua",
+    "heroImage": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1800&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "menu": [
+      {
+        "name": "Breakfast bowl",
+        "description": "Frutas, granola, yogurt y miel local.",
+        "price": "C$ 260"
+      },
+      {
+        "name": "Sandwich de pollo",
+        "description": "Pan artesanal, vegetales frescos y papas.",
+        "price": "C$ 310"
+      },
+      {
+        "name": "Cafe helado",
+        "description": "Cafe nicaraguense servido frio.",
+        "price": "C$ 120"
+      }
+    ],
+    "hours": [{ "day": "Todos los dias", "time": "7:00 AM - 9:00 PM" }],
+    "amenities": ["WiFi", "Patio", "Vegetariano", "Cafe especial"],
+    "coordinates": { "lat": 11.9304, "lng": -85.9538 }
+  },
+  {
+    "id": 3,
+    "slug": "pita-pita",
+    "name": "Pita Pita",
+    "category": "Internacional",
+    "price": "$$",
+    "rating": 4.6,
+    "reviewCount": 936,
+    "isOpenNow": false,
+    "featured": true,
+    "shortDescription": "Cocina mediterranea, cocteles y noches animadas en el centro.",
+    "description": "Sabores mediterraneos, platos para compartir y una ubicacion ideal para caminar por el centro historico despues de cenar.",
+    "address": "Centro historico, Granada, Nicaragua",
+    "phone": "+50588887890",
+    "whatsapp": "50588887890",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Pita+Pita+Granada+Nicaragua",
+    "wazeUrl": "https://waze.com/ul?q=Pita%20Pita%20Granada%20Nicaragua",
+    "heroImage": "https://images.unsplash.com/photo-1544510808-91bcbee1df55?auto=format&fit=crop&w=1800&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1548940740-204726a19be3?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "menu": [
+      {
+        "name": "Mezze mixto",
+        "description": "Hummus, baba ganoush, pita y vegetales.",
+        "price": "C$ 340"
+      },
+      {
+        "name": "Shawarma de pollo",
+        "description": "Pollo especiado, ensalada y salsa tahini.",
+        "price": "C$ 360"
+      },
+      {
+        "name": "Falafel bowl",
+        "description": "Garbanzos, arroz, ensalada y aderezos.",
+        "price": "C$ 300"
+      }
+    ],
+    "hours": [{ "day": "Martes a Domingo", "time": "12:00 PM - 10:00 PM" }],
+    "amenities": ["Cocteles", "Vegano", "Centro", "Para compartir"],
+    "coordinates": { "lat": 11.9308, "lng": -85.9552 }
+  },
+  {
+    "id": 4,
+    "slug": "la-frontera",
+    "name": "La Frontera",
+    "category": "Bar y grill",
+    "price": "$",
+    "rating": 4.5,
+    "reviewCount": 521,
+    "isOpenNow": true,
+    "featured": false,
+    "shortDescription": "Hamburguesas, cervezas frias y musica en vivo algunos dias.",
+    "description": "Un lugar casual para terminar el dia con comida abundante, buen precio y ambiente joven cerca de las calles mas caminables.",
+    "address": "Calle El Arsenal, Granada, Nicaragua",
+    "phone": "+50588880987",
+    "whatsapp": "50588880987",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=La+Frontera+Granada+Nicaragua",
+    "wazeUrl": "https://waze.com/ul?q=La%20Frontera%20Granada%20Nicaragua",
+    "heroImage": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1800&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1532635224-cf024e66d122?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "menu": [
+      {
+        "name": "Burger frontera",
+        "description": "Carne, queso, cebolla caramelizada y papas.",
+        "price": "C$ 290"
+      },
+      {
+        "name": "Alitas BBQ",
+        "description": "Alitas con salsa de la casa.",
+        "price": "C$ 260"
+      },
+      {
+        "name": "Nachos",
+        "description": "Queso, frijoles, pico de gallo y jalapenos.",
+        "price": "C$ 240"
+      }
+    ],
+    "hours": [{ "day": "Miercoles a Lunes", "time": "4:00 PM - 12:00 AM" }],
+    "amenities": ["Musica", "Casual", "Cerveza", "Pet friendly"],
+    "coordinates": { "lat": 11.9315, "lng": -85.9581 }
+  },
+  {
+    "id": 5,
+    "slug": "restaurante-las-colinas",
+    "name": "Restaurante Las Colinas",
+    "category": "Nicaraguense",
+    "price": "$$$",
+    "rating": 4.9,
+    "reviewCount": 314,
+    "isOpenNow": true,
+    "featured": false,
+    "shortDescription": "Vista tranquila, carnes, mariscos y platos de temporada.",
+    "description": "Una opcion elegante para ocasiones especiales, con platos nicaraguenses reinterpretados y atencion pausada.",
+    "address": "Carretera a Laguna de Apoyo, Granada, Nicaragua",
+    "phone": "+50588882345",
+    "whatsapp": "50588882345",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Restaurante+Las+Colinas+Granada+Nicaragua",
+    "wazeUrl": "https://waze.com/ul?q=Restaurante%20Las%20Colinas%20Granada%20Nicaragua",
+    "heroImage": "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1800&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "menu": [
+      {
+        "name": "Pescado al ajo",
+        "description": "Filete fresco con vegetales salteados.",
+        "price": "C$ 560"
+      },
+      {
+        "name": "Ribeye a la parrilla",
+        "description": "Corte premium con pure y ensalada.",
+        "price": "C$ 780"
+      },
+      {
+        "name": "Tres leches",
+        "description": "Postre clasico de la casa.",
+        "price": "C$ 160"
+      }
+    ],
+    "hours": [{ "day": "Jueves a Domingo", "time": "12:00 PM - 9:00 PM" }],
+    "amenities": ["Vista", "Reservas", "Romantico", "Parqueo"],
+    "coordinates": { "lat": 11.922, "lng": -85.936 }
+  },
+  {
+    "id": 6,
+    "slug": "nueva-pizzeria",
+    "name": "Nueva Pizzeria",
+    "category": "Pizza",
+    "price": "$$",
+    "rating": 4.4,
+    "reviewCount": 447,
+    "isOpenNow": false,
+    "featured": false,
+    "shortDescription": "Pizzas artesanales, pastas y vino en un patio informal.",
+    "description": "Una parada comoda para familias y grupos que buscan comida italiana sencilla con porciones generosas.",
+    "address": "Avenida Miguel de Cervantes, Granada, Nicaragua",
+    "phone": "+50588885678",
+    "whatsapp": "50588885678",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Nueva+Pizzeria+Granada+Nicaragua",
+    "wazeUrl": "https://waze.com/ul?q=Nueva%20Pizzeria%20Granada%20Nicaragua",
+    "heroImage": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1800&q=85",
+    "gallery": [
+      "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1200&q=85"
+    ],
+    "menu": [
+      {
+        "name": "Pizza Granada",
+        "description": "Queso, chorizo local, cebolla y chile dulce.",
+        "price": "C$ 390"
+      },
+      {
+        "name": "Pasta al pesto",
+        "description": "Albahaca, parmesano y aceite de oliva.",
+        "price": "C$ 320"
+      },
+      {
+        "name": "Calzone",
+        "description": "Masa horneada rellena de queso y jamon.",
+        "price": "C$ 350"
+      }
+    ],
+    "hours": [{ "day": "Martes a Domingo", "time": "1:00 PM - 10:00 PM" }],
+    "amenities": ["Familiar", "Delivery", "Pastas", "Vino"],
+    "coordinates": { "lat": 11.929, "lng": -85.9549 }
+  }
+]
