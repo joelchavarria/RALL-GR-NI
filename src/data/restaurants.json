@@ -199,29 +199,52 @@
     "address": "Del BAC 2 cuadras al oeste, 1/2 cuadra al sur, Granada, Nicaragua",
     "phone": "+50583334467",
     "whatsapp": "50583334467",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=ECO+Granada+Del+BAC+2+cuadras+al+oeste+Granada+Nicaragua",
+    "mapUrl": "https://maps.app.goo.gl/UVMmhApx9XBpWRa77",
     "wazeUrl": "https://waze.com/ul?q=ECO%20Granada%20Del%20BAC%202%20cuadras%20al%20oeste%20Granada%20Nicaragua",
-    "heroImage": "/images/eco-granada.jpg",
+    "heroImage": "/images/eco-patio-noche.png",
     "gallery": [
-      "/images/eco-granada.jpg",
-      "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=85",
-      "https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=1200&q=85"
+      "/images/eco-bicicleta.png",
+      "/images/eco-burger.png",
+      "/images/eco-bandeja.png",
+      "/images/eco-bandejas.png",
+      "/images/eco-churrasco.png",
+      "/images/eco-steak.png"
     ],
     "menu": [
       {
-        "name": "BBQ ribs",
-        "description": "Costillas al estilo grill con guarnicion.",
-        "price": "C$ 420"
+        "name": "Papas bravas",
+        "description": "Papas organicas cortadas en dados, sofritas y banadas en salsa alioli casera con salsa picante al lado.",
+        "price": "C$ 220"
       },
       {
-        "name": "Wings",
-        "description": "Alitas crujientes con salsa de la casa.",
-        "price": "C$ 260"
+        "name": "El Fachentito",
+        "description": "Entrada inspirada en el vigoron con bolitas de yuca, ensalada con vinagre de platano y chicharron de cascara.",
+        "price": "C$ 170"
       },
       {
-        "name": "House salad",
-        "description": "Ensalada fresca para acompanar platos fuertes.",
-        "price": "C$ 210"
+        "name": "Frijolada criolla",
+        "description": "Frijoles con chorizo criollo, tostones, queso derretido y pico de gallo.",
+        "price": "C$ 225"
+      },
+      {
+        "name": "Toston chimichurri",
+        "description": "Tostones crujientes con carne de res asada, chimichurri y frijolitos molidos.",
+        "price": "C$ 320"
+      },
+      {
+        "name": "Churrasco nica",
+        "description": "Carne a la parrilla con guarniciones de la casa y vegetales.",
+        "price": "C$ 520"
+      },
+      {
+        "name": "Super nachos clasicos",
+        "description": "Nachos cargados para compartir, servidos con salsas y vegetales.",
+        "price": "C$ 340"
+      },
+      {
+        "name": "Ceviche de pescado",
+        "description": "Pescado fresco con citricos, vegetales y acompanamientos.",
+        "price": "C$ 310"
       }
     ],
     "hours": [
