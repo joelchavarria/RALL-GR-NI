@@ -11,7 +11,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-stone-200/70 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          aria-label="Ir al inicio de Granada Sabores"
+          className="flex items-center gap-2"
+        >
           <span className="grid size-9 place-items-center rounded-full bg-emerald-700 text-sm font-bold text-white">
             GS
           </span>
@@ -20,7 +24,10 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm font-medium text-stone-600 md:flex">
+        <nav
+          aria-label="Navegacion principal"
+          className="hidden items-center gap-7 text-sm font-medium text-stone-600 md:flex"
+        >
           {navItems.map((item) => (
             <Link
               key={item.href}

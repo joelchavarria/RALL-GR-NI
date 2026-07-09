@@ -11,12 +11,13 @@ export function RestaurantCard({ restaurant, priority = false }: RestaurantCardP
   return (
     <Link
       href={`/restaurantes/${restaurant.slug}`}
+      aria-label={`Ver informacion, menu y ubicacion de ${restaurant.name}`}
       className="group overflow-hidden rounded-[28px] border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={restaurant.heroImage}
-          alt={restaurant.name}
+          alt={`${restaurant.name}, restaurante en Granada, Nicaragua`}
           fill
           priority={priority}
           sizes="(max-width: 768px) 100vw, 33vw"

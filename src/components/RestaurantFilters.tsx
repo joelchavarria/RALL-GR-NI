@@ -8,22 +8,26 @@ type RestaurantFiltersProps = {
   restaurants: Restaurant[];
   categories: string[];
   prices: string[];
+  initialSearch?: string;
+  initialCategory?: string;
 };
 
 export function RestaurantFilters({
   restaurants,
   categories,
   prices,
+  initialSearch = "",
+  initialCategory = "Todos",
 }: RestaurantFiltersProps) {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("Todos");
+  const [search, setSearch] = useState(initialSearch);
+  const [category, setCategory] = useState(initialCategory);
   const [price, setPrice] = useState("Todos");
   const [openNow, setOpenNow] = useState(false);
 
   const filteredRestaurants = useMemo(() => {
     return restaurants.filter((restaurant) => {
       const matchesSearch =
-        `${restaurant.name} ${restaurant.category} ${restaurant.shortDescription}`
+        `${restaurant.name} ${restaurant.category} ${restaurant.shortDescription} ${restaurant.description} ${restaurant.address} ${restaurant.amenities.join(" ")}`
           .toLowerCase()
           .includes(search.toLowerCase());
       const matchesCategory = category === "Todos" || restaurant.category === category;
@@ -38,20 +42,32 @@ export function RestaurantFilters({
     <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
       <aside className="h-fit rounded-[28px] border border-stone-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
         <div className="space-y-5">
-          <label className="block">
-            <span className="text-sm font-semibold text-stone-900">Busqueda</span>
+          <div className="block">
+            <label
+              htmlFor="restaurant-search"
+              className="text-sm font-semibold text-stone-900"
+            >
+              Busqueda
+            </label>
             <input
+              id="restaurant-search"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               type="search"
               placeholder="Nombre o tipo de comida"
               className="mt-2 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-emerald-700 focus:bg-white"
             />
-          </label>
+          </div>
 
-          <label className="block">
-            <span className="text-sm font-semibold text-stone-900">Categoria</span>
+          <div className="block">
+            <label
+              htmlFor="restaurant-category"
+              className="text-sm font-semibold text-stone-900"
+            >
+              Categoria
+            </label>
             <select
+              id="restaurant-category"
               value={category}
               onChange={(event) => setCategory(event.target.value)}
               className="mt-2 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-emerald-700 focus:bg-white"
@@ -61,11 +77,17 @@ export function RestaurantFilters({
                 <option key={item}>{item}</option>
               ))}
             </select>
-          </label>
+          </div>
 
-          <label className="block">
-            <span className="text-sm font-semibold text-stone-900">Precio</span>
+          <div className="block">
+            <label
+              htmlFor="restaurant-price"
+              className="text-sm font-semibold text-stone-900"
+            >
+              Precio
+            </label>
             <select
+              id="restaurant-price"
               value={price}
               onChange={(event) => setPrice(event.target.value)}
               className="mt-2 w-full rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-sm outline-none transition focus:border-emerald-700 focus:bg-white"
@@ -75,11 +97,15 @@ export function RestaurantFilters({
                 <option key={item}>{item}</option>
               ))}
             </select>
-          </label>
+          </div>
 
-          <label className="flex items-center justify-between rounded-2xl bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900">
+          <label
+            htmlFor="restaurant-open-now"
+            className="flex items-center justify-between rounded-2xl bg-stone-50 px-4 py-3 text-sm font-semibold text-stone-900"
+          >
             Abierto ahora
             <input
+              id="restaurant-open-now"
               checked={openNow}
               onChange={(event) => setOpenNow(event.target.checked)}
               type="checkbox"
@@ -98,7 +124,7 @@ export function RestaurantFilters({
             type="button"
             onClick={() => {
               setSearch("");
-              setCategory("Todos");
+              setCategory(initialCategory);
               setPrice("Todos");
               setOpenNow(false);
             }}

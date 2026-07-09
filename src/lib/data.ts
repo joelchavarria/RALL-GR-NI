@@ -1,5 +1,6 @@
 import placesData from "@/data/places.json";
 import restaurantsData from "@/data/restaurants.json";
+import { categoryToSlug } from "@/lib/seo";
 import type { Place, Restaurant } from "@/lib/types";
 
 export const restaurants = restaurantsData as Restaurant[];
@@ -29,6 +30,14 @@ export function getCategories() {
   return Array.from(
     new Set(restaurants.map((restaurant) => restaurant.category)),
   ).sort();
+}
+
+export function getCategoryBySlug(slug: string) {
+  return getCategories().find((category) => categoryToSlug(category) === slug);
+}
+
+export function getRestaurantsByCategory(category: string) {
+  return restaurants.filter((restaurant) => restaurant.category === category);
 }
 
 export function getPrices() {

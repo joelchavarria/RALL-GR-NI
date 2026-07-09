@@ -1,11 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
+import { JsonLd } from "@/components/JsonLd";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { RestaurantCard } from "@/components/RestaurantCard";
 import { SearchBox } from "@/components/SearchBox";
 import { SectionHeading } from "@/components/SectionHeading";
-import { getCategories, getFeaturedRestaurants, places } from "@/lib/data";
+import { getCategories, getFeaturedRestaurants, places, restaurants } from "@/lib/data";
+import { faqJsonLd, itemListJsonLd } from "@/lib/jsonLd";
+import { buildPageMetadata, getCategoryPath } from "@/lib/seo";
+
+export const metadata = buildPageMetadata({
+  title: "Granada Sabores | Restaurantes en Granada, Nicaragua",
+  description:
+    "Guia local para encontrar restaurantes, cafes, pizza, desayunos, comida tipica y lugares para visitar en Granada, Nicaragua.",
+  path: "/",
+  keywords: [
+    "restaurantes en Granada Nicaragua",
+    "donde comer en Granada",
+    "mejores restaurantes Granada Nicaragua",
+  ],
+});
+
+const homeFaq = [
+  {
+    question: "Donde comer en Granada, Nicaragua?",
+    answer:
+      "Granada Sabores reune restaurantes, cafes, bares y pizzerias de Granada para comparar ambiente, menu, ubicacion y horarios antes de visitar.",
+  },
+  {
+    question: "Que tipos de restaurantes hay en Granada Sabores?",
+    answer:
+      "La guia incluye comida nicaraguense, cafes, bares, parrillas, pizza, cocina internacional y opciones para desayunar o salir en familia.",
+  },
+  {
+    question: "La guia ayuda a negocios locales?",
+    answer:
+      "Si. Granada Sabores busca orientar a visitantes y dar visibilidad a negocios locales reales de Granada, Nicaragua.",
+  },
+];
 
 export default function Home() {
   const categories = getCategories();
@@ -13,6 +46,14 @@ export default function Home() {
 
   return (
     <div className="bg-stone-50">
+      <JsonLd
+        data={itemListJsonLd({
+          name: "Restaurantes en Granada, Nicaragua",
+          path: "/",
+          restaurants,
+        })}
+      />
+      <JsonLd data={faqJsonLd("/", homeFaq)} />
       <Header />
       <main>
         <section className="relative isolate overflow-hidden">
@@ -54,7 +95,7 @@ export default function Home() {
             {categories.map((category) => (
               <Link
                 key={category}
-                href="/restaurantes"
+                href={getCategoryPath(category)}
                 className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
                 <p className="text-lg font-semibold text-stone-950">{category}</p>
@@ -153,6 +194,27 @@ export default function Home() {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Preguntas frecuentes"
+            title="Antes de elegir donde comer"
+            description="Respuestas rapidas para planear una ruta gastronomica clara en Granada."
+          />
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {homeFaq.map((item) => (
+              <article
+                key={item.question}
+                className="rounded-[28px] border border-stone-200 bg-white p-6 shadow-sm"
+              >
+                <h3 className="text-base font-semibold text-stone-950">
+                  {item.question}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-stone-600">{item.answer}</p>
+              </article>
+            ))}
           </div>
         </section>
       </main>
