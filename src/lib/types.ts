@@ -19,6 +19,7 @@ export type Restaurant = {
   address: string;
   phone: string;
   whatsapp: string;
+  facebookUrl?: string;
   mapUrl: string;
   wazeUrl: string;
   heroImage: string;

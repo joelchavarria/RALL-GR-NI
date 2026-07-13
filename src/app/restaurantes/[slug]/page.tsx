@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { RestaurantCard } from "@/components/RestaurantCard";
+import { RestaurantGallery } from "@/components/RestaurantGallery";
 import { getRelatedRestaurants, getRestaurantBySlug, restaurants } from "@/lib/data";
 import { breadcrumbJsonLd, restaurantJsonLd } from "@/lib/jsonLd";
 import {
@@ -164,22 +165,7 @@ function HeroSection({ restaurant }: { restaurant: Restaurant }) {
 
 function Gallery({ restaurant }: { restaurant: Restaurant }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-3">
-      {restaurant.gallery.map((image, index) => (
-        <div
-          key={image}
-          className="relative aspect-[4/3] overflow-hidden rounded-[24px]"
-        >
-          <Image
-            src={image}
-            alt={`Foto ${index + 1} de ${restaurant.name} en Granada, Nicaragua`}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover"
-          />
-        </div>
-      ))}
-    </div>
+    <RestaurantGallery images={restaurant.gallery} restaurantName={restaurant.name} />
   );
 }
 
@@ -413,6 +399,16 @@ function DetailSidebar({
         >
           WhatsApp
         </a>
+        {restaurant.facebookUrl && (
+          <a
+            href={restaurant.facebookUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full border border-stone-300 px-5 py-3 text-center text-sm font-semibold text-stone-950 transition hover:border-emerald-700 hover:text-emerald-700"
+          >
+            Facebook
+          </a>
+        )}
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
           target="_blank"

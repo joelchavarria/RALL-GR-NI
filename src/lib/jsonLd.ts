@@ -79,6 +79,7 @@ export function restaurantJsonLd(restaurant: Restaurant): JsonLdNode {
         servesCuisine: restaurant.category,
         priceRange: restaurant.price,
         telephone: restaurant.phone,
+        sameAs: restaurant.facebookUrl ? [restaurant.facebookUrl] : undefined,
         address: {
           "@type": "PostalAddress",
           streetAddress: restaurant.address,
