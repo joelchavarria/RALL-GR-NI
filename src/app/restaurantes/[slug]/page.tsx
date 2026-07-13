@@ -50,8 +50,8 @@ export async function generateMetadata({
   }
 
   return buildPageMetadata({
-    title: `${restaurant.name}: menu, horarios y ubicacion en Granada`,
-    description: `${restaurant.shortDescription} Consulta menu, horarios, ubicacion, como llegar y restaurantes relacionados en Granada, Nicaragua.`,
+    title: `${restaurant.name}: menú, horarios y ubicación en Granada`,
+    description: `${restaurant.shortDescription} Consulta menú, horarios, ubicación, cómo llegar y restaurantes relacionados en Granada, Nicaragua.`,
     path: `/restaurantes/${restaurant.slug}`,
     keywords: getRestaurantKeywords(restaurant),
     image: restaurant.heroImage,
@@ -98,7 +98,7 @@ export default async function RestaurantDetailPage({
             <Gallery restaurant={restaurant} />
             <InfoSection restaurant={restaurant} />
             <OfferSection restaurant={restaurant} />
-            <MenuSection restaurant={restaurant} />
+            <MenúSection restaurant={restaurant} />
             <RouteSection restaurant={restaurant} />
             <RelatedRestaurantsSection restaurants={relatedRestaurants} />
             <FaqSection items={restaurantFaq} />
@@ -115,16 +115,16 @@ export default async function RestaurantDetailPage({
 function buildRestaurantFaq(restaurant: Restaurant): FaqItem[] {
   return [
     {
-      question: `Donde esta ubicado ${restaurant.name}?`,
-      answer: `${restaurant.name} esta ubicado en ${restaurant.address}.`,
+      question: `¿Dónde está ubicado ${restaurant.name}?`,
+      answer: `${restaurant.name} está ubicado en ${restaurant.address}.`,
     },
     {
-      question: `Que ofrece ${restaurant.name}?`,
+      question: `¿Qué ofrece ${restaurant.name}?`,
       answer: `${restaurant.name} ofrece ${restaurant.shortDescription}`,
     },
     {
-      question: `Como llegar a ${restaurant.name}?`,
-      answer: `Puedes abrir la ubicacion de ${restaurant.name} en Google Maps o Waze desde esta guia.`,
+      question: `¿Cómo llegar a ${restaurant.name}?`,
+      answer: `Puedes abrir la ubicación de ${restaurant.name} en Google Maps o Waze desde esta guía.`,
     },
   ];
 }
@@ -187,7 +187,7 @@ function InfoSection({ restaurant }: { restaurant: Restaurant }) {
   return (
     <section>
       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">
-        Informacion
+        Información
       </p>
       <h2 className="mt-3 text-3xl font-semibold tracking-tight text-stone-950">
         Sobre {restaurant.name}
@@ -218,11 +218,11 @@ function OfferSection({ restaurant }: { restaurant: Restaurant }) {
   return (
     <section>
       <h2 className="text-3xl font-semibold tracking-tight text-stone-950">
-        Que ofrece {restaurant.name}
+        ¿Qué ofrece {restaurant.name}
       </h2>
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         <article className="rounded-[24px] border border-stone-200 bg-white p-5">
-          <h3 className="font-semibold text-stone-950">Gastronomia</h3>
+          <h3 className="font-semibold text-stone-950">Gastronomía</h3>
           <p className="mt-2 text-sm leading-6 text-stone-600">
             Su propuesta se enfoca en {restaurant.category.toLowerCase()}, con platos
             como {suggestedDishes}.
@@ -231,14 +231,14 @@ function OfferSection({ restaurant }: { restaurant: Restaurant }) {
         <article className="rounded-[24px] border border-stone-200 bg-white p-5">
           <h3 className="font-semibold text-stone-950">Ambiente</h3>
           <p className="mt-2 text-sm leading-6 text-stone-600">
-            Es una opcion practica para quienes buscan{" "}
+            Es una opción práctica para quienes buscan{" "}
             {restaurant.amenities.slice(0, 3).join(", ").toLowerCase()} en Granada.
           </p>
         </article>
         <article className="rounded-[24px] border border-stone-200 bg-white p-5">
           <h3 className="font-semibold text-stone-950">Recomendacion</h3>
           <p className="mt-2 text-sm leading-6 text-stone-600">
-            Revisa el menu antes de salir y abre la ruta en Google Maps o Waze para
+            Revisa el menú antes de salir y abre la ruta en Google Maps o Waze para
             llegar sin perder tiempo.
           </p>
         </article>
@@ -247,14 +247,14 @@ function OfferSection({ restaurant }: { restaurant: Restaurant }) {
   );
 }
 
-function MenuSection({ restaurant }: { restaurant: Restaurant }) {
+function MenúSection({ restaurant }: { restaurant: Restaurant }) {
   return (
     <section>
       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-700">
-        Menu
+        Menú
       </p>
       <h2 className="mt-3 text-3xl font-semibold tracking-tight text-stone-950">
-        Menu de {restaurant.name}
+        Menú de {restaurant.name}
       </h2>
       <div className="mt-5 divide-y divide-stone-200 rounded-[28px] border border-stone-200 bg-white">
         {restaurant.menu.map((item) => (
@@ -280,14 +280,14 @@ function RouteSection({ restaurant }: { restaurant: Restaurant }) {
   return (
     <section>
       <h2 className="text-3xl font-semibold tracking-tight text-stone-950">
-        Como llegar y horarios
+        Cómo llegar y horarios
       </h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         <article className="rounded-[24px] border border-stone-200 bg-white p-5">
-          <h3 className="font-semibold text-stone-950">Ubicacion</h3>
+          <h3 className="font-semibold text-stone-950">Ubicación</h3>
           <p className="mt-2 text-sm leading-6 text-stone-600">
             {restaurant.address}. Puedes usar Google Maps o Waze desde los botones de
-            esta pagina.
+            esta página.
           </p>
         </article>
         <article className="rounded-[24px] border border-stone-200 bg-white p-5">
@@ -309,7 +309,7 @@ function RelatedRestaurantsSection({ restaurants }: { restaurants: Restaurant[] 
         Restaurantes relacionados
       </p>
       <h2 className="mt-3 text-3xl font-semibold tracking-tight text-stone-950">
-        Mas opciones para comer en Granada
+        Más opciones para comer en Granada
       </h2>
       <div className="mt-5 grid gap-6 md:grid-cols-3">
         {restaurants.map((item) => (
@@ -349,7 +349,7 @@ function DetailSidebar({
     <aside className="h-fit rounded-[28px] border border-stone-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="text-sm text-stone-500">Calificacion</p>
+          <p className="text-sm text-stone-500">Calificación</p>
           <p className="text-2xl font-semibold text-stone-950">
             {restaurant.rating.toFixed(1)} / 5
           </p>
@@ -373,7 +373,7 @@ function DetailSidebar({
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-stone-950">Ubicacion</p>
+          <p className="text-sm font-semibold text-stone-950">Ubicación</p>
           <p className="mt-2 text-sm leading-6 text-stone-600">{restaurant.address}</p>
           <div className="mt-3 rounded-3xl bg-stone-100 p-4 text-sm text-stone-600">
             {restaurant.coordinates.lat.toFixed(4)},{" "}

@@ -13,7 +13,7 @@ import { buildPageMetadata, getCategoryPath } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Granada Sabores | Restaurantes en Granada, Nicaragua",
   description:
-    "Guia local para encontrar restaurantes, cafes, pizza, desayunos, comida tipica y lugares para visitar en Granada, Nicaragua.",
+    "Guía local para encontrar restaurantes, cafés, pizza, desayunos, comida típica y lugares para visitar en Granada, Nicaragua.",
   path: "/",
   keywords: [
     "restaurantes en Granada Nicaragua",
@@ -24,19 +24,19 @@ export const metadata = buildPageMetadata({
 
 const homeFaq = [
   {
-    question: "Donde comer en Granada, Nicaragua?",
+    question: "¿Dónde comer en Granada, Nicaragua?",
     answer:
-      "Granada Sabores reune restaurantes, cafes, bares y pizzerias de Granada para comparar ambiente, menu, ubicacion y horarios antes de visitar.",
+      "Granada Sabores reúne restaurantes, cafés, bares y pizzerías de Granada para comparar ambiente, menú, ubicación y horarios antes de visitar.",
   },
   {
-    question: "Que tipos de restaurantes hay en Granada Sabores?",
+    question: "¿Qué tipos de restaurantes hay en Granada Sabores?",
     answer:
-      "La guia incluye comida nicaraguense, cafes, bares, parrillas, pizza, cocina internacional y opciones para desayunar o salir en familia.",
+      "La guía incluye comida nicaragüense, cafés, bares, parrillas, pizza, cocina internacional y opciones para desayunar o salir en familia.",
   },
   {
-    question: "La guia ayuda a negocios locales?",
+    question: "¿La guía ayuda a negocios locales?",
     answer:
-      "Si. Granada Sabores busca orientar a visitantes y dar visibilidad a negocios locales reales de Granada, Nicaragua.",
+      "Sí. Granada Sabores busca orientar a visitantes y dar visibilidad a negocios locales reales de Granada, Nicaragua.",
   },
 ];
 
@@ -71,14 +71,14 @@ export default function Home() {
           <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 lg:px-8">
             <div className="max-w-4xl text-white">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white/80">
-                Guia gastronomica de Granada
+                Guía gastronómica de Granada
               </p>
               <h1 className="mt-5 max-w-3xl text-5xl font-semibold tracking-tight sm:text-7xl">
                 Granada Sabores
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90 sm:text-xl">
-                Restaurantes, cafes, bares y paradas imperdibles para saborear la ciudad
-                colonial mas encantadora de Nicaragua.
+                Restaurantes, cafés, bares y paradas imperdibles para saborear la ciudad
+                colonial más encantadora de Nicaragua.
               </p>
             </div>
             <SearchBox />
@@ -87,7 +87,7 @@ export default function Home() {
 
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Categorias"
+            eyebrow="Categorías"
             title="Encuentra el plan perfecto"
             description="Explora por tipo de cocina, presupuesto y ambiente para armar una ruta a tu ritmo."
           />
@@ -113,7 +113,7 @@ export default function Home() {
               <SectionHeading
                 eyebrow="Destacados"
                 title="Negocios locales para apoyar"
-                description="Lugares reales de Granada donde cada visita tambien ayuda a mover la economia local."
+                description="Lugares reales de Granada donde cada visita también ayuda a mover la economía local."
               />
               <Link
                 href="/restaurantes"
@@ -179,12 +179,12 @@ export default function Home() {
             </div>
             <div>
               <SectionHeading
-                eyebrow="Quienes somos"
-                title="Una guia hecha para ayudar"
-                description="Somos emprendedores que creemos en aportar a la sociedad creando herramientas utiles para todos. Granada Sabores nace para orientar a visitantes, promover negocios locales y mostrar con orgullo la belleza de Granada, Nicaragua."
+                eyebrow="Quiénes somos"
+                title="Una guía hecha para ayudar"
+                description="Somos emprendedores que creemos en aportar a la sociedad creando herramientas útiles para todos. Granada Sabores nace para orientar a visitantes, promover negocios locales y mostrar con orgullo la belleza de Granada, Nicaragua."
               />
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                {["Apoyo local", "Guia clara", "Granada para todos"].map((item) => (
+                {["Apoyo local", "Guía clara", "Granada para todos"].map((item) => (
                   <div
                     key={item}
                     className="rounded-3xl border border-stone-200 bg-stone-50 p-5 text-sm font-semibold text-stone-900"
@@ -200,8 +200,8 @@ export default function Home() {
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Preguntas frecuentes"
-            title="Antes de elegir donde comer"
-            description="Respuestas rapidas para planear una ruta gastronomica clara en Granada."
+            title="Antes de elegir dónde comer"
+            description="Respuestas rápidas para planear una ruta gastronómica clara en Granada."
           />
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {homeFaq.map((item) => (

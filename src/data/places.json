@@ -1,16 +1,16 @@
 [
   {
     "name": "Catedral de Granada",
-    "description": "Icono amarillo frente al parque central, ideal para caminar antes o despues de comer.",
+    "description": "Icono amarillo frente al parque central, ideal para caminar antes o después de comer.",
     "image": "/images/catedral-granada.jpeg"
   },
   {
     "name": "Isletas de Granada",
-    "description": "Paseo en lancha entre pequenas islas con vistas al Mombacho.",
+    "description": "Paseo en lancha entre pequeñas islas con vistas al Mombacho.",
     "image": "/images/granada-isletas.jpeg"
   },
   {
-    "name": "Centro historico",
+    "name": "Centro histórico",
     "description": "Calles coloniales, balcones, luces y vida local para caminar Granada de noche.",
     "image": "/images/granada-noche.jpeg"
   }

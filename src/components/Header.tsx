@@ -4,7 +4,7 @@ const navItems = [
   { href: "/", label: "Inicio" },
   { href: "/restaurantes", label: "Restaurantes" },
   { href: "/#lugares", label: "Lugares" },
-  { href: "/#quienes-somos", label: "Quienes somos" },
+  { href: "/#quienes-somos", label: "Quiénes somos" },
 ];
 
 export function Header() {
@@ -25,7 +25,7 @@ export function Header() {
         </Link>
 
         <nav
-          aria-label="Navegacion principal"
+          aria-label="Navegación principal"
           className="hidden items-center gap-7 text-sm font-medium text-stone-600 md:flex"
         >
           {navItems.map((item) => (

@@ -47,7 +47,7 @@ export function RestaurantFilters({
               htmlFor="restaurant-search"
               className="text-sm font-semibold text-stone-900"
             >
-              Busqueda
+              Búsqueda
             </label>
             <input
               id="restaurant-search"
@@ -64,7 +64,7 @@ export function RestaurantFilters({
               htmlFor="restaurant-category"
               className="text-sm font-semibold text-stone-900"
             >
-              Categoria
+              Categoría
             </label>
             <select
               id="restaurant-category"
@@ -146,7 +146,7 @@ export function RestaurantFilters({
               No encontramos restaurantes con esos filtros.
             </p>
             <p className="mt-2 text-sm text-stone-600">
-              Prueba otra categoria, precio o busqueda.
+              Prueba otra categoria, precio o búsqueda.
             </p>
           </div>
         ) : null}

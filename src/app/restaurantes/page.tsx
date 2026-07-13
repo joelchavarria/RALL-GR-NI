@@ -11,7 +11,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Restaurantes en Granada, Nicaragua",
   description:
-    "Listado de restaurantes en Granada, Nicaragua con filtros por categoria, precio, apertura y busqueda para elegir donde comer.",
+    "Listado de restaurantes en Granada, Nicaragua con filtros por categoría, precio, apertura y búsqueda para elegir dónde comer.",
   path: "/restaurantes",
   keywords: [
     "restaurantes en Granada Nicaragua",
@@ -57,8 +57,8 @@ export default async function RestaurantsPage({ searchParams }: RestaurantsPageP
           <SectionHeading
             as="h1"
             eyebrow="Restaurantes"
-            title="Explora donde comer en Granada"
-            description="Filtra por categoria, presupuesto, disponibilidad y busqueda para encontrar el lugar adecuado."
+            title="Explora dónde comer en Granada"
+            description="Filtra por categoría, presupuesto, disponibilidad y búsqueda para encontrar el lugar adecuado."
           />
         </div>
         <div className="mt-10">

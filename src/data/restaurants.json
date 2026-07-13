@@ -3,14 +3,14 @@
     "id": 1,
     "slug": "el-zaguan",
     "name": "El Zaguan",
-    "category": "Nicaraguense",
+    "category": "Nicaragüense",
     "price": "$$",
     "rating": 4.8,
     "reviewCount": 842,
     "isOpenNow": true,
     "featured": true,
-    "shortDescription": "Cortes a la parrilla, vigoron y cocina tradicional cerca de La Calzada.",
-    "description": "Un clasico granadino para almuerzos familiares, cenas con amigos y visitantes que quieren probar sabores locales con servicio atento.",
+    "shortDescription": "Cortes a la parrilla, vigorón y cocina tradicional cerca de La Calzada.",
+    "description": "Un clásico granadino para almuerzos familiares, cenas con amigos y visitantes que quieren probar sabores locales con servicio atento.",
     "address": "Calle La Calzada, Granada, Nicaragua",
     "phone": "+50588881234",
     "whatsapp": "50588881234",
@@ -24,13 +24,13 @@
     ],
     "menu": [
       {
-        "name": "Lomito jalapeno",
+        "name": "Lomito jalapeño",
         "description": "Corte suave con salsa cremosa y guarniciones.",
         "price": "C$ 520"
       },
       {
-        "name": "Vigoron granadino",
-        "description": "Yuca, chicharron y ensalada de repollo.",
+        "name": "Vigorón granadino",
+        "description": "Yuca, chicharrón y ensalada de repollo.",
         "price": "C$ 220"
       },
       {
@@ -56,8 +56,8 @@
     "reviewCount": 1250,
     "isOpenNow": true,
     "featured": true,
-    "shortDescription": "Cafe de especialidad, desayunos, almuerzos y cena en una casa colonial.",
-    "description": "Un espacio querido en el centro historico que une cultura, cafe, comunidad y comida fresca. Ideal para desayunar, trabajar tranquilo, almorzar ligero o cerrar el dia en un patio lleno de plantas.",
+    "shortDescription": "Café de especialidad, desayunos, almuerzos y cena en una casa colonial.",
+    "description": "Un espacio querido en el centro histórico que une cultura, café, comunidad y comida fresca. Ideal para desayunar, trabajar tranquilo, almorzar ligero o cerrar el día en un patio lleno de plantas.",
     "address": "Del Parque Central 1 cuadra al Este, Calle La Libertad, Granada, Nicaragua",
     "phone": "+50525528582",
     "whatsapp": "50525528582",
@@ -82,11 +82,11 @@
       },
       {
         "name": "Cafe helado",
-        "description": "Cafe nicaraguense servido frio.",
+        "description": "Café nicaragüense servido frío.",
         "price": "C$ 120"
       }
     ],
-    "hours": [{ "day": "Todos los dias", "time": "7:00 AM - 9:00 PM" }],
+    "hours": [{ "day": "Todos los días", "time": "7:00 AM - 9:00 PM" }],
     "amenities": ["WiFi", "Patio", "Vegetariano", "Cafe especial", "Tienda local"],
     "coordinates": { "lat": 11.9304, "lng": -85.9538 }
   },
@@ -100,8 +100,8 @@
     "reviewCount": 936,
     "isOpenNow": true,
     "featured": true,
-    "shortDescription": "Sabores mediterraneos y arabes: hummus, falafel, kebabs, pita y ensaladas.",
-    "description": "Pita Pita es una parada popular para compartir platos mediterraneos en un ambiente relajado. Su menu incluye opciones vegetarianas, pitas, falafel, hummus, ensaladas, kebabs y pizzas artesanales.",
+    "shortDescription": "Sabores mediterráneos y árabes: hummus, falafel, kebabs, pita y ensaladas.",
+    "description": "Pita Pita es una parada popular para compartir platos mediterráneos en un ambiente relajado. Su menú incluye opciones vegetarianas, pitas, falafel, hummus, ensaladas, kebabs y pizzas artesanales.",
     "address": "Calle La Libertad / Calle Cervantes, Granada, Nicaragua",
     "phone": "+50582729184",
     "whatsapp": "50582729184",
@@ -131,7 +131,7 @@
       }
     ],
     "hours": [
-      { "day": "Lunes a Sabado", "time": "12:00 PM - 10:00 PM" },
+      { "day": "Lunes a Sábado", "time": "12:00 PM - 10:00 PM" },
       { "day": "Domingo", "time": "11:00 AM - 10:00 PM" }
     ],
     "amenities": ["Cocteles", "Vegano", "Centro", "Para compartir", "Patio"],
@@ -147,8 +147,8 @@
     "reviewCount": 521,
     "isOpenNow": true,
     "featured": true,
-    "shortDescription": "Hamburguesas, comida casual, cervezas frias y ambiente familiar cerca de Xalteva.",
-    "description": "Comedor La Frontera es un negocio familiar con estilo sencillo y campestre. Es conocido por sus hamburguesas, comida abundante, precios accesibles y atencion amable para locales y visitantes.",
+    "shortDescription": "Hamburguesas, comida casual, cervezas frías y ambiente familiar cerca de Xalteva.",
+    "description": "Comedor La Frontera es un negocio familiar con estilo sencillo y campestre. Es conocido por sus hamburguesas, comida abundante, precios accesibles y atención amable para locales y visitantes.",
     "address": "Iglesia Xalteva 1 1/2 cuadras al Este, Granada, Nicaragua",
     "phone": "+50525582120",
     "whatsapp": "50525582120",
@@ -173,12 +173,12 @@
       },
       {
         "name": "Nachos",
-        "description": "Queso, frijoles, pico de gallo y jalapenos.",
+        "description": "Queso, frijoles, pico de gallo y jalapeños.",
         "price": "C$ 240"
       }
     ],
     "hours": [
-      { "day": "Miercoles a Domingo", "time": "12:00 PM - 7:30 PM" },
+      { "day": "Miércoles a Domingo", "time": "12:00 PM - 7:30 PM" },
       { "day": "Lunes y Martes", "time": "Cerrado" }
     ],
     "amenities": ["Casual", "Cerveza", "Familiar", "Pet friendly", "Terraza"],
@@ -195,7 +195,7 @@
     "isOpenNow": false,
     "featured": false,
     "shortDescription": "Kitchen & patio con comida familiar, ambiente relajado y cocteles en el centro.",
-    "description": "ECO Granada Kitchen & Patio es un punto local para compartir en familia o con amigos. Ofrece comida nicaraguense e internacional, opciones de bar & grill, cocteles y distintos ambientes entre terraza, espacios techados y barra.",
+    "description": "ECO Granada Kitchen & Patio es un punto local para compartir en familia o con amigos. Ofrece comida nicaragüense e internacional, opciones de bar & grill, cocteles y distintos ambientes entre terraza, espacios techados y barra.",
     "address": "Del BAC 2 cuadras al oeste, 1/2 cuadra al sur, Granada, Nicaragua",
     "phone": "+50583334467",
     "whatsapp": "50583334467",
@@ -213,12 +213,12 @@
     "menu": [
       {
         "name": "Papas bravas",
-        "description": "Papas organicas cortadas en dados, sofritas y banadas en salsa alioli casera con salsa picante al lado.",
+        "description": "Papas orgánicas cortadas en dados, sofritas y bañadas en salsa alioli casera con salsa picante al lado.",
         "price": "C$ 220"
       },
       {
         "name": "El Fachentito",
-        "description": "Entrada inspirada en el vigoron con bolitas de yuca, ensalada con vinagre de platano y chicharron de cascara.",
+        "description": "Entrada inspirada en el vigorón con bolitas de yuca, ensalada con vinagre de plátano y chicharrón de cáscara.",
         "price": "C$ 170"
       },
       {
@@ -237,18 +237,18 @@
         "price": "C$ 520"
       },
       {
-        "name": "Super nachos clasicos",
+        "name": "Super nachos clásicos",
         "description": "Nachos cargados para compartir, servidos con salsas y vegetales.",
         "price": "C$ 340"
       },
       {
         "name": "Ceviche de pescado",
-        "description": "Pescado fresco con citricos, vegetales y acompanamientos.",
+        "description": "Pescado fresco con cítricos, vegetales y acompañamientos.",
         "price": "C$ 310"
       }
     ],
     "hours": [
-      { "day": "Miercoles y Jueves", "time": "12:00 PM - 10:00 PM" },
+      { "day": "Miércoles y Jueves", "time": "12:00 PM - 10:00 PM" },
       { "day": "Viernes", "time": "12:00 PM - 11:45 PM" }
     ],
     "amenities": ["Patio", "Barra", "Familiar", "Cocteles", "Reservas"],
@@ -265,7 +265,7 @@
     "isOpenNow": false,
     "featured": false,
     "shortDescription": "Pizzas artesanales, pastas y vino en un patio informal.",
-    "description": "Una parada comoda para familias y grupos que buscan comida italiana sencilla con porciones generosas.",
+    "description": "Una parada cómoda para familias y grupos que buscan comida italiana sencilla con porciones generosas.",
     "address": "Avenida Miguel de Cervantes, Granada, Nicaragua",
     "phone": "+50588885678",
     "whatsapp": "50588885678",
@@ -290,7 +290,7 @@
       },
       {
         "name": "Calzone",
-        "description": "Masa horneada rellena de queso y jamon.",
+        "description": "Masa horneada rellena de queso y jamón.",
         "price": "C$ 350"
       }
     ],

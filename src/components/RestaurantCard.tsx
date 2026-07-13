@@ -48,7 +48,7 @@ export function RestaurantCard({ restaurant, priority = false }: RestaurantCardP
           <span className="font-semibold text-stone-950">
             {restaurant.rating.toFixed(1)} / 5
           </span>
-          <span className="text-stone-500">{restaurant.reviewCount} resenas</span>
+          <span className="text-stone-500">{restaurant.reviewCount} reseñas</span>
         </div>
       </div>
     </Link>

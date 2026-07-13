@@ -1,6 +1,6 @@
 # Granada Sabores
 
-Granada Sabores es una guia gastronomica moderna de Granada, Nicaragua. El proyecto esta construido con Next.js 15, React, TypeScript y Tailwind CSS, con una arquitectura simple, datos locales y componentes reutilizables.
+Granada Sabores es una guía gastronómica moderna de Granada, Nicaragua. El proyecto está construido con Next.js 15, React, TypeScript y Tailwind CSS, con una arquitectura simple, datos locales y componentes reutilizables.
 
 ## Stack
 
@@ -9,15 +9,15 @@ Granada Sabores es una guia gastronomica moderna de Granada, Nicaragua. El proye
 - Tailwind CSS
 - ESLint y Prettier
 - Datos mock en JSON
-- Diseno responsive mobile first
+- Diseño responsive mobile first
 
 ## Pantallas
 
-- Home con hero, buscador, categorias, restaurantes destacados, lugares turisticos, seccion "Quienes Somos" y footer.
-- Listado de restaurantes con filtros por categoria, precio, abierto ahora y busqueda.
-- Detalle de restaurante con hero, galeria, informacion, menu, horarios, ubicacion, botones de Google Maps, Waze, WhatsApp, compartir y restaurantes relacionados.
+- Home con hero, buscador, categorías, restaurantes destacados, lugares turísticos, sección "Quienes Somos" y footer.
+- Listado de restaurantes con filtros por categoría, precio, abierto ahora y búsqueda.
+- Detalle de restaurante con hero, galería, información, menú, horarios, ubicación, botones de Google Maps, Waze, WhatsApp, compartir y restaurantes relacionados.
 
-## Instalacion local
+## Instalación local
 
 ```bash
 npm install
@@ -63,15 +63,15 @@ src/
 
 ## Datos
 
-Los restaurantes y lugares turisticos viven en `src/data`. La capa `src/lib/data.ts` centraliza el acceso a esos datos para que las paginas no dependan directamente del origen.
+Los restaurantes y lugares turísticos viven en `src/data`. La capa `src/lib/data.ts` centraliza el acceso a esos datos para que las páginas no dependan directamente del origen.
 
-## Publicacion
+## Publicación
 
-El proyecto esta preparado para publicarse como aplicacion web:
+El proyecto está preparado para publicarse como aplicación web:
 
-- Usa App Router y generacion estatica para los detalles de restaurante.
+- Usa App Router y generación estática para los detalles de restaurante.
 - No requiere backend ni base de datos.
-- Las imagenes externas permitidas estan configuradas en `next.config.ts`.
+- Las imágenes externas permitidas están configuradas en `next.config.ts`.
 - El comando de build es `npm run build`.
 
 Variables de entorno requeridas actualmente: ninguna.

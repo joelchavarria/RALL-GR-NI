@@ -9,16 +9,16 @@ export const siteConfig = {
   region: "Granada",
   country: "NI",
   description:
-    "Guia gastronomica de Granada, Nicaragua con restaurantes, cafes, bares, pizza, desayunos, comida tipica y lugares para visitar.",
+    "Guía gastronómica de Granada, Nicaragua con restaurantes, cafés, bares, pizza, desayunos, comida típica y lugares para visitar.",
   keywords: [
     "restaurantes en Granada Nicaragua",
     "donde comer en Granada",
     "cafeterias en Granada",
     "pizza en Granada Nicaragua",
     "desayuno en Granada",
-    "comida tipica Granada Nicaragua",
+    "comida típica Granada Nicaragua",
     "mejores restaurantes Granada Nicaragua",
-    "guia gastronomica Granada Nicaragua",
+    "guía gastronómica Granada Nicaragua",
   ],
 };
 
@@ -115,7 +115,7 @@ export function getRestaurantKeywords(restaurant: Restaurant) {
     `${restaurant.name} Granada Nicaragua`,
     `${restaurant.category} en Granada Nicaragua`,
     `menu ${restaurant.name}`,
-    `ubicacion ${restaurant.name}`,
+    `ubicación ${restaurant.name}`,
     `horarios ${restaurant.name}`,
   ];
 }

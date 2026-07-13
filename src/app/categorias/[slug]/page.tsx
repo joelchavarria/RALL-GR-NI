@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
 
   if (!category) {
     return {
-      title: "Categoria no encontrada",
+      title: "Categoría no encontrada",
       robots: {
         index: false,
         follow: false,
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
 
   return buildPageMetadata({
     title: `${category} en Granada, Nicaragua`,
-    description: `Restaurantes de ${category.toLowerCase()} en Granada, Nicaragua. Compara opciones locales, menu, ubicacion, horarios y restaurantes relacionados.`,
+    description: `Restaurantes de ${category.toLowerCase()} en Granada, Nicaragua. Compara opciones locales, menú, ubicación, horarios y restaurantes relacionados.`,
     path: getCategoryPath(category),
     keywords: [
       `${category} en Granada Nicaragua`,
@@ -125,7 +125,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-semibold tracking-tight text-stone-950">
-            Explora otras categorias
+            Explora otras categorías
           </h2>
           <div className="mt-5 flex flex-wrap gap-3">
             {otherCategories.map((item) => (
