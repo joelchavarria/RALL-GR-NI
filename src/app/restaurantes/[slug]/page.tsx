@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { RestaurantCard } from "@/components/RestaurantCard";
 import { RestaurantGallery } from "@/components/RestaurantGallery";
-import { TablePreview } from "@/components/TablePreview";
+import TablePreview from "@/components/TablePreview";
 import { getRelatedRestaurants, getRestaurantBySlug, restaurants } from "@/lib/data";
 import { breadcrumbJsonLd, restaurantJsonLd } from "@/lib/jsonLd";
 import { absoluteUrl, buildPageMetadata, getRestaurantKeywords } from "@/lib/seo";
