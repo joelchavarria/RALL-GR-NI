@@ -132,6 +132,8 @@ export function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
   function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
     if (event.touches.length !== 2) return;
 
+    event.preventDefault();
+
     const touchA = event.touches[0];
     const touchB = event.touches[1];
     pinchStartDistance.current = distance(touchA, touchB);
@@ -140,6 +142,8 @@ export function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
 
   function handleTouchMove(event: TouchEvent<HTMLDivElement>) {
     if (event.touches.length !== 2 || pinchStartDistance.current === null) return;
+
+    event.preventDefault();
 
     const touchA = event.touches[0];
     const touchB = event.touches[1];
@@ -157,14 +161,6 @@ export function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
     if (event.touches.length < 2) {
       pinchStartDistance.current = null;
     }
-  }
-
-  function zoomIn() {
-    setScale((current) => clamp(current + 0.1, 0.7, 1.6));
-  }
-
-  function zoomOut() {
-    setScale((current) => clamp(current - 0.1, 0.7, 1.6));
   }
 
   return (
@@ -228,6 +224,7 @@ export function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
         >
           <div
             className="relative h-full w-full overflow-hidden bg-transparent"
+            style={{ touchAction: "none" }}
             onClick={(event) => event.stopPropagation()}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -235,13 +232,13 @@ export function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
           >
             <video
               ref={videoRef}
-              className="absolute inset-0 h-full w-full object-cover bg-white"
+              className="absolute inset-0 h-full w-full object-cover"
               playsInline
               muted
               autoPlay
             />
 
-            <div className="absolute inset-0 bg-white/0" />
+            <div className="absolute inset-0 bg-transparent" />
 
             <div className="absolute left-1/2 top-5 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/90 p-1.5 text-stone-950 backdrop-blur-md shadow-lg">
               <button
@@ -273,109 +270,30 @@ export function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
               ×
             </button>
 
-            <button
-              type="button"
-              className="absolute right-4 top-5 grid size-12 place-items-center rounded-full bg-white/90 text-xl text-stone-950 shadow-lg backdrop-blur transition hover:bg-white"
-              aria-label="Compartir"
-            >
-              ↗
-            </button>
-
-            <div className="absolute right-4 top-20 flex flex-col gap-2 rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-md">
-              <button
-                type="button"
-                onClick={zoomIn}
-                className="grid size-10 place-items-center rounded-full bg-stone-950 text-white transition hover:bg-stone-800"
-                aria-label="Aumentar zoom"
-              >
-                +
-              </button>
-              <button
-                type="button"
-                onClick={zoomOut}
-                className="grid size-10 place-items-center rounded-full bg-stone-950 text-white transition hover:bg-stone-800"
-                aria-label="Disminuir zoom"
-              >
-                -
-              </button>
-            </div>
-
-            <div className="absolute inset-x-0 bottom-0 flex justify-center px-4 pb-10">
-              <div className="w-full max-w-2xl rounded-[28px] border border-white/40 bg-white/90 p-4 text-stone-950 backdrop-blur-md shadow-xl">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.22em] text-stone-500">
-                      {selectedDish?.name ?? restaurant.name}
-                    </p>
-                    <p className="mt-1 text-lg font-semibold">
-                      {mode === "ar" ? "AR" : "Objeto"}
-                    </p>
-                  </div>
-                  <span className="rounded-full bg-stone-950 px-3 py-1 text-sm font-semibold text-white">
-                    {selectedDish?.price ?? ""}
-                  </span>
-                </div>
-
-                <div className="mt-4 flex items-center gap-3 rounded-[22px] bg-stone-100 p-3">
-                  <div className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-white">
-                    <Image
-                      src={previewImage}
-                      alt={selectedDish?.name ?? restaurant.name}
-                      fill
-                      sizes="64px"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold">
-                      {selectedDish?.description}
-                    </p>
-                    <p className="mt-1 text-xs text-stone-600">
-                      {cameraReady
-                        ? mode === "ar"
-                          ? "Acerca o aleja el celular para ajustar el plato."
-                          : "Haz zoom con dos dedos para ver el objeto."
-                        : cameraError ?? "Activando camara..."}
-                    </p>
-                  </div>
-                </div>
-
-                {cameraError ? (
-                  <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
-                    {cameraError}
-                  </div>
-                ) : null}
-              </div>
-            </div>
-
-            <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center px-6">
+            <div className="absolute inset-x-0 bottom-[12vh] flex justify-center px-6">
               <div
                 className="relative transition-all duration-700 ease-out"
                 style={{
-                  transform: `translateY(${lifted ? -24 : 16}px) scale(${scale}) rotate(${mode === "object" ? -2 : 0}deg)`,
+                  transform: `translateY(${lifted ? -8 : 8}px) scale(${scale}) rotate(${mode === "object" ? -1 : 0}deg)`,
                 }}
               >
-                <div className="absolute inset-x-6 bottom-4 h-12 rounded-full bg-black/10 blur-2xl" />
-                <div className="relative aspect-[4/3] w-[min(85vw,30rem)]">
+                <div className="absolute inset-x-6 bottom-4 h-12 rounded-full bg-black/15 blur-2xl" />
+                <div className="relative aspect-square w-[min(88vw,34rem)]">
                   <div className="absolute inset-x-8 top-3 h-14 rounded-full bg-white/10 blur-2xl" />
-                  <div className="absolute inset-0 rounded-full bg-white/10 blur-3xl" />
-                  <div className="absolute inset-x-0 bottom-2 h-[18%] rounded-[42px] bg-gradient-to-r from-amber-950 via-amber-900 to-amber-800 opacity-95 shadow-[0_18px_60px_rgba(0,0,0,0.45)]" />
-                  <div className="absolute inset-x-[8%] bottom-[1.5%] h-[10%] rounded-[999px] bg-amber-950/90 blur-sm" />
 
                   <div
-                    className={`absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out ${
-                      lifted ? "translate-y-[-48%] scale-100" : "translate-y-[-30%] scale-95"
+                    className={`absolute left-1/2 top-1/2 w-[86%] -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out ${
+                      lifted ? "translate-y-[-50%]" : "translate-y-[-38%]"
                     }`}
                   >
-                    <div className="relative aspect-square overflow-hidden rounded-full border-[10px] border-white bg-white shadow-[0_28px_70px_rgba(0,0,0,0.55)]">
+                    <div className="relative aspect-square overflow-hidden rounded-full bg-transparent shadow-none">
                       <Image
                         src={previewImage}
                         alt={`Vista previa de ${selectedDish?.name ?? restaurant.name}`}
                         fill
                         sizes="(max-width: 1024px) 90vw, 520px"
-                        className="object-cover"
+                        className="object-contain"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
                     </div>
                   </div>
                 </div>
@@ -387,6 +305,12 @@ export function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
                 <div className="rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-stone-950 backdrop-blur">
                   Activando camara...
                 </div>
+              </div>
+            ) : null}
+
+            {cameraError ? (
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-stone-950 shadow-lg backdrop-blur">
+                {cameraError}
               </div>
             ) : null}
           </div>
