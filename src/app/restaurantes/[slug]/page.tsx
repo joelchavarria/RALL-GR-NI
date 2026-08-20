@@ -302,7 +302,7 @@ function MenuSection({ restaurant }: { restaurant: Restaurant }) {
                 </div>
                 <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-stone-100 pt-4">
                   <p className="text-sm text-stone-500">Vista interactiva del plato</p>
-                  <TablePreview restaurant={restaurant} dish={item} image={getDishImage(index)} />
+                  <TablePreview dish={item} image={getDishImage(index)} />
                 </div>
               </div>
             </article>
