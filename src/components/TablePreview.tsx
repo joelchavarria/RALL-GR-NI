@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import type { Restaurant, MenuItem } from "@/lib/types";
+
+type ZoomableVideoTrack = MediaStreamTrack;
+type CameraCapabilities = {
+  getCapabilities?: () => Omit<MediaTrackCapabilities, "zoom"> & {
+    zoom?: { min?: number; max?: number; step?: number };
+  };
+};
 
 interface TablePreviewProps {
   restaurant: Restaurant;
@@ -22,16 +30,25 @@ export default function TablePreview({
   const [isOpen, setIsOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const [scale, setScale] = useState(1);
+  const trackRef = useRef<ZoomableVideoTrack | null>(null);
+  const [cameraZoom, setCameraZoom] = useState(1);
+  const zoomRangeRef = useRef({ min: 1, max: 1 });
   const lastDistRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const open = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment" },
+        video: { facingMode: { ideal: "environment" } },
       });
       streamRef.current = stream;
+      const track = stream.getVideoTracks()[0] as ZoomableVideoTrack | undefined;
+      trackRef.current = track ?? null;
+      const zoom = (track as unknown as CameraCapabilities | undefined)?.getCapabilities?.().zoom;
+      const min = zoom?.min ?? 1;
+      const max = zoom?.max ?? 1;
+      zoomRangeRef.current = { min, max };
+      setCameraZoom(min);
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
@@ -47,8 +64,22 @@ export default function TablePreview({
       streamRef.current.getTracks().forEach((t) => t.stop());
       streamRef.current = null;
     }
+    trackRef.current = null;
     setIsOpen(false);
-    setScale(1);
+    setCameraZoom(1);
+  }, []);
+
+  const updateCameraZoom = useCallback((nextZoom: number) => {
+    const track = trackRef.current;
+    const { min, max } = zoomRangeRef.current;
+    const zoom = Math.min(Math.max(nextZoom, min), max);
+
+    setCameraZoom(zoom);
+    if (track && max > min) {
+      void track.applyConstraints({ advanced: [{ zoom } as MediaTrackConstraintSet] }).catch(() => {
+        // Algunos navegadores exponen la capacidad de zoom pero no permiten cambiarla.
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -65,7 +96,7 @@ export default function TablePreview({
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      setScale((s) => Math.min(Math.max(s - e.deltaY * 0.002, 0.3), 4));
+      updateCameraZoom(cameraZoom - e.deltaY * 0.002);
     };
 
     const onTouchStart = (e: TouchEvent) => {
@@ -84,7 +115,7 @@ export default function TablePreview({
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (lastDistRef.current > 0) {
           const delta = dist / lastDistRef.current;
-          setScale((s) => Math.min(Math.max(s * delta, 0.3), 4));
+          updateCameraZoom(cameraZoom * delta);
         }
         lastDistRef.current = dist;
       }
@@ -105,7 +136,7 @@ export default function TablePreview({
       el.removeEventListener("touchmove", onTouchMove);
       el.removeEventListener("touchend", onTouchEnd);
     };
-  }, [isOpen]);
+  }, [cameraZoom, isOpen, updateCameraZoom]);
 
   return (
     <>
@@ -158,26 +189,26 @@ export default function TablePreview({
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          <div
-            className="absolute left-1/2 -translate-x-1/2"
-            style={{
-              bottom: "18%",
-              transform: `translateX(-50%) scale(${scale})`,
-              transformOrigin: "center bottom",
-            }}
-          >
-            {dishImage ? (
-              <img
-                src={dishImage}
-                alt={dishName}
-                className="w-52 h-52 object-cover rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
-                draggable={false}
-              />
-            ) : (
-              <div className="w-52 h-52 rounded-xl bg-white/20 flex items-center justify-center text-white text-4xl shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
-                🍽️
+          <div className="pointer-events-none absolute inset-x-0 bottom-[7%] flex justify-center px-4">
+            <div className="relative aspect-[4/3] w-[min(88vw,32rem)]">
+              <div className="absolute inset-x-[7%] bottom-[3%] h-[27%] rounded-[50%] bg-amber-950/90 shadow-[0_24px_45px_rgba(0,0,0,0.48)]" />
+              <div className="absolute inset-x-[11%] bottom-[7%] h-[20%] rounded-[50%] bg-gradient-to-b from-amber-700 via-amber-900 to-amber-950" />
+              <div className="absolute left-1/2 top-[5%] h-[78%] w-[78%] -translate-x-1/2 overflow-hidden rounded-[50%] border-[8px] border-stone-100 bg-stone-50 shadow-[0_18px_42px_rgba(0,0,0,0.38)]">
+                {dishImage ? (
+                  <Image
+                    src={dishImage}
+                    alt={dishName}
+                    fill
+                    sizes="(max-width: 640px) 88vw, 512px"
+                    className="object-cover"
+                    draggable={false}
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-5xl">🍽️</div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/10" />
               </div>
-            )}
+            </div>
           </div>
 
           <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent">
@@ -189,6 +220,7 @@ export default function TablePreview({
             </div>
             <button
               onClick={close}
+              aria-label="Cerrar vista de mesa"
               className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
             >
               ✕
@@ -197,7 +229,7 @@ export default function TablePreview({
 
           <div className="absolute bottom-0 left-0 right-0 p-4 pb-8 bg-gradient-to-t from-black/40 to-transparent">
             <p className="text-white/70 text-xs text-center">
-              Pellizcá para acercar / alejar
+              Mové el teléfono para explorar la mesa. Pellizcá para acercar la cámara.
             </p>
           </div>
         </div>
