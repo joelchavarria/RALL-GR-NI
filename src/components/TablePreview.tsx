@@ -1,239 +1,408 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
-import type { Restaurant, MenuItem } from "@/lib/types";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { TouchEvent } from "react";
+import type { MenuItem, Restaurant } from "@/lib/types";
 
-type ZoomableVideoTrack = MediaStreamTrack;
-type CameraCapabilities = {
-  getCapabilities?: () => Omit<MediaTrackCapabilities, "zoom"> & {
-    zoom?: { min?: number; max?: number; step?: number };
-  };
+type TablePreviewProps = {
+  restaurant: Pick<Restaurant, "name" | "heroImage" | "gallery" | "menu">;
+  dish?: MenuItem;
+  image?: string;
 };
 
-interface TablePreviewProps {
-  restaurant: Restaurant;
-  dish: MenuItem;
-  image?: string;
-}
+type Step = "confirm" | "viewer";
 
-export default function TablePreview({
-  restaurant,
-  dish,
-  image,
-}: TablePreviewProps) {
-  const dishName = dish.name;
-  const dishPrice = dish.price;
-  const dishImage = image;
-  const restaurantName = restaurant.name;
-  const [showConfirm, setShowConfirm] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+export default function TablePreview({ restaurant, dish, image }: TablePreviewProps) {
+  const [step, setStep] = useState<Step | null>(null);
+  const [mode, setMode] = useState<"ar" | "object">("ar");
+  const [lifted, setLifted] = useState(false);
+  const [scale, setScale] = useState(1);
+  const [cameraError, setCameraError] = useState<string | null>(null);
+  const [cameraReady, setCameraReady] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const trackRef = useRef<ZoomableVideoTrack | null>(null);
-  const [cameraZoom, setCameraZoom] = useState(1);
-  const zoomRangeRef = useRef({ min: 1, max: 1 });
-  const lastDistRef = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const pinchStartDistance = useRef<number | null>(null);
+  const pinchStartScale = useRef(1);
 
-  const open = useCallback(async () => {
+  const selectedDish = dish ?? restaurant.menu[0];
+  const previewImage = useMemo(
+    () => image ?? restaurant.gallery[0] ?? restaurant.heroImage,
+    [image, restaurant.gallery, restaurant.heroImage],
+  );
+
+  useEffect(() => {
+    if (step !== "viewer") return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        stopCamera();
+        setStep(null);
+        setLifted(false);
+        setCameraReady(false);
+        setCameraError(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    if (streamRef.current && videoRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+      void videoRef.current.play();
+      setCameraReady(true);
+      const timer = window.setTimeout(() => setLifted(true), 120);
+
+      return () => {
+        document.body.style.overflow = previousOverflow;
+        window.removeEventListener("keydown", handleKeyDown);
+        window.clearTimeout(timer);
+        stopCamera();
+        setLifted(false);
+        setCameraReady(false);
+        setCameraError(null);
+      };
+    }
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+      stopCamera();
+      setLifted(false);
+      setCameraReady(false);
+      setCameraError(null);
+    };
+  }, [step]);
+
+  function openConfirm() {
+    setStep("confirm");
+  }
+
+  async function openViewer() {
+    setCameraError(null);
+    setCameraReady(false);
+
+    if (!window.isSecureContext) {
+      setCameraError(
+        "La camara requiere HTTPS o localhost. Abre el sitio en una conexion segura.",
+      );
+      setStep("viewer");
+      return;
+    }
+
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setCameraError("Tu navegador no soporta camara.");
+      setStep("viewer");
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { ideal: "environment" } },
+        audio: false,
+        video: { facingMode: "environment" },
       });
+
       streamRef.current = stream;
-      const track = stream.getVideoTracks()[0] as ZoomableVideoTrack | undefined;
-      trackRef.current = track ?? null;
-      const zoom = (track as unknown as CameraCapabilities | undefined)?.getCapabilities?.().zoom;
-      const min = zoom?.min ?? 1;
-      const max = zoom?.max ?? 1;
-      zoomRangeRef.current = { min, max };
-      setCameraZoom(min);
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-      setIsOpen(true);
-      setShowConfirm(false);
+      setStep("viewer");
     } catch {
-      alert("No se pudo acceder a la cámara. Por favor, habilitá el permiso.");
+      setCameraError("No pudimos activar la camara. Revisa permisos.");
+      setStep("viewer");
     }
-  }, []);
+  }
 
-  const close = useCallback(() => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop());
-      streamRef.current = null;
+  function closeViewer() {
+    stopCamera();
+    setStep(null);
+    setLifted(false);
+    setScale(1);
+    setCameraReady(false);
+    setCameraError(null);
+  }
+
+  function stopCamera() {
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
     }
-    trackRef.current = null;
-    setIsOpen(false);
-    setCameraZoom(1);
-  }, []);
+  }
 
-  const updateCameraZoom = useCallback((nextZoom: number) => {
-    const track = trackRef.current;
-    const { min, max } = zoomRangeRef.current;
-    const zoom = Math.min(Math.max(nextZoom, min), max);
+  function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
+    if (event.touches.length !== 2) return;
 
-    setCameraZoom(zoom);
-    if (track && max > min) {
-      void track.applyConstraints({ advanced: [{ zoom } as MediaTrackConstraintSet] }).catch(() => {
-        // Algunos navegadores exponen la capacidad de zoom pero no permiten cambiarla.
-      });
+    const touchA = event.touches[0];
+    const touchB = event.touches[1];
+    pinchStartDistance.current = distance(touchA, touchB);
+    pinchStartScale.current = scale;
+  }
+
+  function handleTouchMove(event: TouchEvent<HTMLDivElement>) {
+    if (event.touches.length !== 2 || pinchStartDistance.current === null) return;
+
+    const touchA = event.touches[0];
+    const touchB = event.touches[1];
+    const currentDistance = distance(touchA, touchB);
+    const nextScale = clamp(
+      pinchStartScale.current * (currentDistance / pinchStartDistance.current),
+      0.7,
+      1.6,
+    );
+
+    setScale(nextScale);
+  }
+
+  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    if (event.touches.length < 2) {
+      pinchStartDistance.current = null;
     }
-  }, []);
+  }
 
-  useEffect(() => {
-    return () => {
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((t) => t.stop());
-      }
-    };
-  }, []);
+  function zoomIn() {
+    setScale((current) => clamp(current + 0.1, 0.7, 1.6));
+  }
 
-  useEffect(() => {
-    if (!isOpen || !containerRef.current) return;
-    const el = containerRef.current;
-
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      updateCameraZoom(cameraZoom - e.deltaY * 0.002);
-    };
-
-    const onTouchStart = (e: TouchEvent) => {
-      if (e.touches.length === 2) {
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-        lastDistRef.current = Math.sqrt(dx * dx + dy * dy);
-      }
-    };
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        const dx = e.touches[0].clientX - e.touches[1].clientX;
-        const dy = e.touches[0].clientY - e.touches[1].clientY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (lastDistRef.current > 0) {
-          const delta = dist / lastDistRef.current;
-          updateCameraZoom(cameraZoom * delta);
-        }
-        lastDistRef.current = dist;
-      }
-    };
-
-    const onTouchEnd = () => {
-      lastDistRef.current = 0;
-    };
-
-    el.addEventListener("wheel", onWheel, { passive: false });
-    el.addEventListener("touchstart", onTouchStart, { passive: true });
-    el.addEventListener("touchmove", onTouchMove, { passive: false });
-    el.addEventListener("touchend", onTouchEnd, { passive: true });
-
-    return () => {
-      el.removeEventListener("wheel", onWheel);
-      el.removeEventListener("touchstart", onTouchStart);
-      el.removeEventListener("touchmove", onTouchMove);
-      el.removeEventListener("touchend", onTouchEnd);
-    };
-  }, [cameraZoom, isOpen, updateCameraZoom]);
+  function zoomOut() {
+    setScale((current) => clamp(current - 0.1, 0.7, 1.6));
+  }
 
   return (
     <>
       <button
-        onClick={() => setShowConfirm(true)}
-        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors text-sm"
+        type="button"
+        onClick={openConfirm}
+        className="inline-flex items-center justify-center rounded-full bg-stone-950 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-emerald-800"
       >
         Ver en tu mesa
       </button>
 
-      {showConfirm && (
+      {step === "confirm" ? (
         <div
-          className="fixed inset-0 z-[60] bg-black/60 flex items-center justify-center p-4"
-          onClick={() => setShowConfirm(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Ver en AR de ${selectedDish?.name ?? restaurant.name}`}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+          onClick={closeViewer}
         >
           <div
-            className="bg-white rounded-xl p-6 max-w-sm w-full shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-white/15 bg-white/92 p-6 shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
           >
-            <h3 className="font-bold text-lg text-gray-900 mb-1">{dishName}</h3>
-            <p className="text-emerald-600 font-semibold mb-3">{dishPrice}</p>
-            <p className="text-gray-500 text-sm mb-5">
-              Se abrirá la cámara para ver cómo queda este plato en tu mesa.
-            </p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowConfirm(false)}
-                className="flex-1 py-2.5 rounded-lg bg-gray-100 text-gray-700 font-medium hover:bg-gray-200 transition-colors"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={open}
-                className="flex-1 py-2.5 rounded-lg bg-emerald-600 text-white font-medium hover:bg-emerald-700 transition-colors"
-              >
-                Abrir cámara
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#fff7ed_0%,#f7efe7_55%,#e7d8ca_100%)] opacity-90" />
+            <div className="relative">
+              <h3 className="text-2xl font-semibold text-stone-950">¿Ver en AR?</h3>
+              <p className="mt-3 text-lg leading-7 text-stone-700">
+                Puedes ver este objeto en 3D y colocarlo en tu entorno mediante la
+                realidad aumentada.
+              </p>
 
-      {isOpen && (
-        <div className="fixed inset-0 z-[70] bg-black" ref={containerRef}>
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-
-          <div className="pointer-events-none absolute inset-x-0 bottom-[7%] flex justify-center px-4">
-            <div className="relative aspect-[4/3] w-[min(88vw,32rem)]">
-              <div className="absolute inset-x-[7%] bottom-[3%] h-[27%] rounded-[50%] bg-amber-950/90 shadow-[0_24px_45px_rgba(0,0,0,0.48)]" />
-              <div className="absolute inset-x-[11%] bottom-[7%] h-[20%] rounded-[50%] bg-gradient-to-b from-amber-700 via-amber-900 to-amber-950" />
-              <div className="absolute left-1/2 top-[5%] h-[78%] w-[78%] -translate-x-1/2 overflow-hidden rounded-[50%] border-[8px] border-stone-100 bg-stone-50 shadow-[0_18px_42px_rgba(0,0,0,0.38)]">
-                {dishImage ? (
-                  <Image
-                    src={dishImage}
-                    alt={dishName}
-                    fill
-                    sizes="(max-width: 640px) 88vw, 512px"
-                    className="object-cover"
-                    draggable={false}
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center text-5xl">🍽️</div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-white/10" />
+              <div className="mt-6 flex gap-3">
+                <button
+                  type="button"
+                  onClick={closeViewer}
+                  className="flex-1 rounded-full bg-stone-200 px-4 py-3 text-sm font-semibold text-stone-950 transition hover:bg-stone-300"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={openViewer}
+                  className="flex-1 rounded-full bg-stone-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800"
+                >
+                  Ver en AR
+                </button>
               </div>
             </div>
           </div>
+        </div>
+      ) : null}
 
-          <div className="absolute top-0 left-0 right-0 p-4 flex items-center justify-between bg-gradient-to-b from-black/50 to-transparent">
-            <div className="text-white">
-              <p className="font-bold text-base">{dishName}</p>
-              <p className="text-emerald-300 text-sm font-medium">
-                {dishPrice} · {restaurantName}
-              </p>
+      {step === "viewer" ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Vista AR de ${selectedDish?.name ?? restaurant.name}`}
+          className="fixed inset-0 z-[100] bg-transparent"
+          onClick={closeViewer}
+        >
+          <div
+            className="relative h-full w-full overflow-hidden bg-transparent"
+            onClick={(event) => event.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <video
+              ref={videoRef}
+              className="absolute inset-0 h-full w-full object-cover bg-white"
+              playsInline
+              muted
+              autoPlay
+            />
+
+            <div className="absolute inset-0 bg-white/0" />
+
+            <div className="absolute left-1/2 top-5 flex -translate-x-1/2 items-center gap-2 rounded-full bg-white/90 p-1.5 text-stone-950 backdrop-blur-md shadow-lg">
+              <button
+                type="button"
+                onClick={() => setMode("ar")}
+                className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
+                  mode === "ar" ? "bg-stone-950 text-white" : "text-stone-600"
+                }`}
+              >
+                AR
+              </button>
+              <button
+                type="button"
+                onClick={() => setMode("object")}
+                className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
+                  mode === "object" ? "bg-stone-950 text-white" : "text-stone-600"
+                }`}
+              >
+                Objeto
+              </button>
             </div>
-            <button
-              onClick={close}
-              aria-label="Cerrar vista de mesa"
-              className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/30 transition-colors"
-            >
-              ✕
-            </button>
-          </div>
 
-          <div className="absolute bottom-0 left-0 right-0 p-4 pb-8 bg-gradient-to-t from-black/40 to-transparent">
-            <p className="text-white/70 text-xs text-center">
-              Mové el teléfono para explorar la mesa. Pellizcá para acercar la cámara.
-            </p>
+            <button
+              type="button"
+              onClick={closeViewer}
+              className="absolute left-4 top-5 grid size-12 place-items-center rounded-full bg-white/90 text-2xl text-stone-950 shadow-lg backdrop-blur transition hover:bg-white"
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+
+            <button
+              type="button"
+              className="absolute right-4 top-5 grid size-12 place-items-center rounded-full bg-white/90 text-xl text-stone-950 shadow-lg backdrop-blur transition hover:bg-white"
+              aria-label="Compartir"
+            >
+              ↗
+            </button>
+
+            <div className="absolute right-4 top-20 flex flex-col gap-2 rounded-full bg-white/90 p-2 shadow-lg backdrop-blur-md">
+              <button
+                type="button"
+                onClick={zoomIn}
+                className="grid size-10 place-items-center rounded-full bg-stone-950 text-white transition hover:bg-stone-800"
+                aria-label="Aumentar zoom"
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onClick={zoomOut}
+                className="grid size-10 place-items-center rounded-full bg-stone-950 text-white transition hover:bg-stone-800"
+                aria-label="Disminuir zoom"
+              >
+                -
+              </button>
+            </div>
+
+            <div className="absolute inset-x-0 bottom-0 flex justify-center px-4 pb-10">
+              <div className="w-full max-w-2xl rounded-[28px] border border-white/40 bg-white/90 p-4 text-stone-950 backdrop-blur-md shadow-xl">
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.22em] text-stone-500">
+                      {selectedDish?.name ?? restaurant.name}
+                    </p>
+                    <p className="mt-1 text-lg font-semibold">
+                      {mode === "ar" ? "AR" : "Objeto"}
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-stone-950 px-3 py-1 text-sm font-semibold text-white">
+                    {selectedDish?.price ?? ""}
+                  </span>
+                </div>
+
+                <div className="mt-4 flex items-center gap-3 rounded-[22px] bg-stone-100 p-3">
+                  <div className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-white">
+                    <Image
+                      src={previewImage}
+                      alt={selectedDish?.name ?? restaurant.name}
+                      fill
+                      sizes="64px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold">
+                      {selectedDish?.description}
+                    </p>
+                    <p className="mt-1 text-xs text-stone-600">
+                      {cameraReady
+                        ? mode === "ar"
+                          ? "Acerca o aleja el celular para ajustar el plato."
+                          : "Haz zoom con dos dedos para ver el objeto."
+                        : cameraError ?? "Activando camara..."}
+                    </p>
+                  </div>
+                </div>
+
+                {cameraError ? (
+                  <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+                    {cameraError}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center px-6">
+              <div
+                className="relative transition-transform duration-700 ease-out"
+                style={{
+                  transform: `translateY(${lifted ? -24 : 16}px) scale(${scale}) rotate(${mode === "object" ? -2 : 0}deg)`,
+                }}
+              >
+                <div className="absolute inset-x-6 bottom-4 h-12 rounded-full bg-black/10 blur-2xl" />
+                <div className="relative aspect-[4/3] w-[min(85vw,30rem)]">
+                  <div className="absolute inset-x-8 top-3 h-14 rounded-full bg-white/10 blur-2xl" />
+                  <div className="absolute inset-0 rounded-full bg-white/10 blur-3xl" />
+                  <div className="absolute inset-x-0 bottom-2 h-[18%] rounded-[42px] bg-gradient-to-r from-amber-950 via-amber-900 to-amber-800 opacity-95 shadow-[0_18px_60px_rgba(0,0,0,0.45)]" />
+                  <div className="absolute inset-x-[8%] bottom-[1.5%] h-[10%] rounded-[999px] bg-amber-950/90 blur-sm" />
+
+                  <div
+                    className={`absolute left-1/2 top-1/2 w-[78%] -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out ${
+                      lifted ? "translate-y-[-48%] scale-100" : "translate-y-[-30%] scale-95"
+                    }`}
+                  >
+                    <div className="relative aspect-square overflow-hidden rounded-full border-[10px] border-white bg-white shadow-[0_28px_70px_rgba(0,0,0,0.55)]">
+                      <Image
+                        src={previewImage}
+                        alt={`Vista previa de ${selectedDish?.name ?? restaurant.name}`}
+                        fill
+                        sizes="(max-width: 1024px) 90vw, 520px"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {!cameraReady && !cameraError ? (
+              <div className="absolute inset-0 grid place-items-center">
+                <div className="rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-stone-950 backdrop-blur">
+                  Activando camara...
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
+}
+
+function distance(
+  touchA: { clientX: number; clientY: number },
+  touchB: { clientX: number; clientY: number },
+) {
+  return Math.hypot(touchA.clientX - touchB.clientX, touchA.clientY - touchB.clientY);
+}
+
+function clamp(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, value));
 }
