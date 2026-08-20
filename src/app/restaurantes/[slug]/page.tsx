@@ -7,7 +7,6 @@ import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { RestaurantCard } from "@/components/RestaurantCard";
 import { RestaurantGallery } from "@/components/RestaurantGallery";
-import TablePreview from "@/components/TablePreview";
 import { getRelatedRestaurants, getRestaurantBySlug, restaurants } from "@/lib/data";
 import { breadcrumbJsonLd, restaurantJsonLd } from "@/lib/jsonLd";
 import { absoluteUrl, buildPageMetadata, getRestaurantKeywords } from "@/lib/seo";
@@ -299,10 +298,6 @@ function MenuSection({ restaurant }: { restaurant: Restaurant }) {
                   <span className="shrink-0 rounded-full bg-stone-100 px-3 py-1 text-sm font-semibold text-stone-700">
                     {item.price}
                   </span>
-                </div>
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-stone-100 pt-4">
-                  <p className="text-sm text-stone-500">Vista interactiva del plato</p>
-                  <TablePreview dish={item} image={getDishImage(index)} />
                 </div>
               </div>
             </article>
